@@ -21,7 +21,6 @@ export class StudentService {
     ParentsMobileNumber: new FormControl('', [Validators.required, Validators.minLength(8)]),
     division: new FormControl(0),
     gender: new FormControl('1'),
-    //joiningDate: new FormControl('')
   })
 
   initializeForm() {
@@ -32,8 +31,7 @@ export class StudentService {
       age: '',
       ParentsMobileNumber: '',
       division: 0,
-      gender: '1',
-      //joiningDate: ''
+      gender: '1'
     })
   }
 
@@ -52,7 +50,6 @@ export class StudentService {
       ParentsMobileNumber: student.ParentsMobileNumber,
       division: student.division,
       gender: student.gender,
-      //joiningDate: student.joiningDate == "" ? "" : this.datePipe.transform(student.joiningDate, 'yyyy-MM-dd')
     })
   }
 
@@ -64,8 +61,7 @@ export class StudentService {
       age: student.age,
       ParentsMobileNumber: student.ParentsMobileNumber,
       division: student.division,
-      gender: student.gender,
-      //joiningDate: student.joiningDate == "" ? "" : this.datePipe.transform(student.joiningDate, 'yyyy-MM-dd')
+      gender: student.gender
     })
   }
 
