@@ -1,0 +1,59 @@
+<mat-toolbar>
+    <span>{{service.form.controls['$key'].value?"Modify Student" : "New Student"}}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1">
+        <mat-icon><strong>clear</strong></mat-icon>
+    </button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+    <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="controls-container">
+                <input type="hidden" formControlName="$key">
+                <mat-form-field>
+                    <input formControlName="fullName" matInput placeholder="Full Name*">
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="rollNo" matInput placeholder="Roll No">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="age" matInput placeholder="Age">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="ParentsMobileNumber" matInput placeholder="Parent Mobile No*">
+                    <mat-error *ngIf="service.form.controls['ParentsMobileNumber'].errors?.required">This field is mandatory.</mat-error>
+                    <mat-error *ngIf="service.form.controls['ParentsMobileNumber'].errors?.minlength">Minium 8characters needed.</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="controls-container">
+                <div class="add-bottom-padding">
+                    <mat-radio-group formControlName="gender">
+                        <mat-radio-button value="1" style="margin-left: 7px;">Male</mat-radio-button>
+                        <mat-radio-button value="2" style="margin-left: 7px;">Female</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <mat-form-field class="divisionTop">
+                    <mat-select formControlName="division" placeholder="Division">
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let division of divisionService.array">
+                            <mat-option value="{{ division.$key }}">{{division.name}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                <!-- <mat-form-field>
+                    <input formControlName="joiningDate" [matDatepicker]="picker" matInput placeholder="Joining Date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field> -->
+                <div class="button-row">
+                    <button mat-raised-button color="primary" [disabled]="service.form.invalid" type="submit">Submit</button>
+                    <button mat-raised-button color="warn" type="submit" (click)="onClear()">Clear</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
